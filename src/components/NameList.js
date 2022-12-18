@@ -7,7 +7,7 @@ const NameList = ({ names }) => {
     <div>
       <ul>
         {names.map((item) => {
-          return <li key={item.id}>{item.text}</li>;
+          return <li key={item.id}>{item.text}12321321</li>;
         })}
       </ul>
     </div>
