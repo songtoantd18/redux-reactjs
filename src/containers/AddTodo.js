@@ -12,6 +12,7 @@ const AddTodo = ({ dispatchAddName }) => {
           onClick={(e) => {
             e.preventDefault();
             dispatchAddName(name);
+            setName("");
           }}
         >
           add name
