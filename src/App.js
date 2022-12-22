@@ -1,12 +1,11 @@
 import React from "react";
 import NameList from "./components/NameList";
-import AddTodo from "./containers/AddTodo";
+import AddName from "./containers/AddName";
 
 const App = () => {
   return (
     <div>
-      <AddTodo />
-      <hr />
+      <AddName />
       <NameList />
     </div>
   );

@@ -1,9 +1,8 @@
 import React, { useState } from "react";
-import { addName } from "./../action/index";
+import { addName } from "../action";
 import { connect } from "react-redux";
-
-const AddTodo = ({ dispatchAddName }) => {
-  const [name, setName] = useState("");
+const AddName = ({ dispatchAddName }) => {
+  const [name, setName] = useState("song toan");
   return (
     <div>
       <form>
@@ -12,6 +11,7 @@ const AddTodo = ({ dispatchAddName }) => {
           onClick={(e) => {
             e.preventDefault();
             dispatchAddName(name);
+            setName("");
           }}
         >
           add name
@@ -24,4 +24,4 @@ const mapDispatchToProps = (dispatch) => ({
   dispatchAddName: (text) => dispatch(addName(text)),
 });
 
-export default connect(() => {}, mapDispatchToProps)(AddTodo);
+export default connect(() => {}, mapDispatchToProps)(AddName);
