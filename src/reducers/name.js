@@ -6,29 +6,28 @@ const name = (state = [], action) => {
         {
           id: action.id,
           text: action.text,
+          time: action.time,
+          isEdit: false,
         },
       ];
     case "DELETE_NAME":
       return state.filter((todo) => todo.id !== action.id);
-    case "EDIT_TODO":
-      const { id, data } = action.payload;
-      const indexTask = state.findIndex((item) => item.id === id);
-      if (indexTask === -1) return state;
-      const todos = state;
-      todos[indexTask] = data;
-      return todos;
-    case "MARK_TODO":
-      return state.map((todo) =>
-        todo.id === action.id ? { ...todo, marked: !todo.marked } : todo
-      );
-
-    case "MARK_ALL":
-      const areAllMarked = state.every((todo) => todo.marked);
-      return state.map((todo) => ({ ...todo, marked: !areAllMarked }));
-
-    case "CLEAR_MARKED":
-      return state.filter((todo) => todo.marked === false);
-
+    case "CHANGE_STATUS":
+      return state.map((todo) => {
+        return todo.id === action.id
+          ? { ...todo, isEdit: !todo.isEdit }
+          : { ...todo, isEdit: todo.isEdit ? !todo.isEdit : todo.isEdit };
+      });
+    case "CHANGE_CONTENT":
+      return state.map((todo) => {
+        return todo.id === action.id
+          ? { ...todo, isEdit: !todo.isEdit, text: action.text }
+          : todo;
+      });
+    case "UN_DELETE_TODO":
+      return state.map((todo) => {
+        return todo.id === action.id ? { ...todo, isEdit: !todo.isEdit } : todo;
+      });
     default:
       return state;
   }
