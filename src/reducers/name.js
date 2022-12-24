@@ -1,7 +1,6 @@
 const name = (state = [], action) => {
   switch (action.type) {
     case "ADD_NAME":
-      console.log("{state,action}:", { state, action });
       return [
         ...state,
         {
