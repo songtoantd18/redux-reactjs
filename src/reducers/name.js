@@ -12,9 +12,12 @@ const name = (state = [], action) => {
     case "DELETE_NAME":
       return state.filter((todo) => todo.id !== action.id);
     case "EDIT_TODO":
-      return state.map((todo) =>
-        todo.id === action.id ? { ...todo, text: action.text } : todo
-      );
+      const { id, data } = action.payload;
+      const indexTask = state.findIndex((item) => item.id === id);
+      if (indexTask === -1) return state;
+      const todos = state;
+      todos[indexTask] = data;
+      return todos;
     case "MARK_TODO":
       return state.map((todo) =>
         todo.id === action.id ? { ...todo, marked: !todo.marked } : todo

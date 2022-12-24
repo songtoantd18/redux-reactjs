@@ -8,15 +8,14 @@ export const addName = (text) => {
   };
 };
 export const handleDelete = (id) => {
+  console.log("id:", id);
   return {
     type: "DELETE_NAME",
     id,
   };
 };
-export function editTodo(id, text) {
-  return {
-    type: "EDIT_TODO",
-    id,
-    text,
-  };
-}
+export const editTodo = (id, text) => ({
+  type: "EDIT_TODO",
+  id,
+  text,
+});

@@ -1,18 +1,42 @@
-import React from "react";
+import React, { useState } from "react";
 import { connect } from "react-redux";
 import { handleDelete } from "../action";
+import { editTodo } from "./../action/index";
 
-const NameList = ({ names, handleDelete }) => {
-  console.log("names:", names);
+const NameList = ({ names, handleDelete, editTodo, id }) => {
+  console.log("id:", id);
+  const [isEdit, setIsEdit] = useState(false);
+  const [value, setValue] = useState("");
+
+  const handleSubmit = (id) => {
+    console.log("id:", id);
+    setIsEdit(false);
+    // editTodo({
+    //   id,
+    //   data: { id, text: value },
+    // });
+  };
   return (
     <div>
       <ul>
         {names.map((item) => {
           return (
             <li key={item.id}>
-              {item.text}
+              {isEdit ? (
+                <input
+                  value={value}
+                  onChange={(e) => setValue(e.target.value)}
+                />
+              ) : (
+                item.text
+              )}
+              {isEdit ? (
+                <button onClick={handleSubmit}>submit</button>
+              ) : (
+                <button onClick={() => setIsEdit(true)}>Edit</button>
+              )}
+
               <button onClick={() => handleDelete(item.id)}>X</button>
-              <button>Edit</button>
             </li>
           );
         })}
@@ -27,5 +51,6 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => ({
   // dispatchDeleteName: (id) => dispatch(handleDelete(id)),
   handleDelete: (id) => dispatch(handleDelete(id)),
+  editTodo: (id, text) => dispatch(editTodo(id, text)),
 });
 export default connect(mapStateToProps, mapDispatchToProps)(NameList);
