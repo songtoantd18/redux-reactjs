@@ -1,10 +1,11 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { connect } from "react-redux";
 import {
   handleDelete,
   changeContentTodo,
   changeStatusTodo,
   unDeleteTodo,
+  editItem,
 } from "../action";
 
 const NameList = ({
@@ -12,9 +13,11 @@ const NameList = ({
   handleDelete,
   changeStatusTodo,
   changeContentTodo,
+  editItem,
 }) => {
   const [newText, setNewText] = useState([""]);
   const [vidu, setVidu] = useState(false);
+
   return (
     <div>
       <ul>
@@ -24,8 +27,9 @@ const NameList = ({
               {item.text}
               <button onClick={() => handleDelete(item.id)}>X</button>
 
-              {vidu ? <input /> : item.text}
-              <button onClick={() => setVidu(true)}>vidu</button>
+              {item.isEdit ? <input /> : item.text}
+
+              <button onClick={() => editItem(item.id)}>vidu</button>
 
               {item.isEdit ? (
                 <form>
@@ -71,6 +75,7 @@ const mapDispatchToProps = (dispatch) => ({
   changeStatusTodo: (id) => dispatch(changeStatusTodo(id)),
   changeContentTodo: (id, text) => dispatch(changeContentTodo(id, text)),
   unDeleteTodo: (id) => dispatch(unDeleteTodo(id)),
+  editItem: (id, text) => dispatch(editItem(id, text)),
 
   // changeContentTodo: (id) => dispatch(changeStatusTodo(id)),
 });

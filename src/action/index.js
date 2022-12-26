@@ -37,3 +37,8 @@ export const unDeleteTodo = (id) => ({
   type: "UN_DELETE_TODO",
   id,
 });
+export const editItem = (id, text) => ({
+  type: "EDIT_ITEM",
+  id,
+  text,
+});
