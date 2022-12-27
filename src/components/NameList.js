@@ -17,6 +17,13 @@ const NameList = ({
 }) => {
   const [newText, setNewText] = useState([""]);
   const [vidu, setVidu] = useState(false);
+  const [editName, setEditName] = useState({
+    currentId: "",
+    isEditName: false,
+  });
+  const handleEdit = () => {
+    return;
+  };
 
   return (
     <div>
@@ -24,13 +31,30 @@ const NameList = ({
         {names.map((item) => {
           return (
             <li key={item.id}>
+              //////////////////////////////////////////
+              {/* {item.id === editName.currentId &&
+                editName.isEditName === true} ? <input />:{item.id} */}
+              {item.id === editName.currentId &&
+              editName.isEditName === true ? (
+                <input />
+              ) : (
+                item.text
+              )}
+              <button
+                onClick={(e) =>
+                  setEditName({
+                    currentId: item.id,
+                    isEditName: true,
+                  })
+                }
+              >
+                edit new
+              </button>
+              ///////////////////////////////////////////
               {item.text}
               <button onClick={() => handleDelete(item.id)}>X</button>
-
               {item.isEdit ? <input /> : item.text}
-
               <button onClick={() => editItem(item.id)}>vidu</button>
-
               {item.isEdit ? (
                 <form>
                   <input
